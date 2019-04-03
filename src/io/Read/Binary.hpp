@@ -18,8 +18,13 @@ Binary( Matrix<T>& A, const string filename )
 {
     EL_DEBUG_CSE
     std::ifstream file( filename.c_str(), std::ios::binary );
-    if( !file.is_open() )
-        RuntimeError("Could not open ",filename);
+    if( !file.is_open() ){
+
+      //check for automatically added extension  
+      filename = filename + "." + FileExtension(BINARY);
+      if( !file.is_open() ) RuntimeError("Could not open ",filename);
+
+    }
 
     Int height, width;
     file.read( (char*)&height, sizeof(Int) );
@@ -46,8 +51,14 @@ Binary( AbstractDistMatrix<T>& A, const string filename )
 {
     EL_DEBUG_CSE
     std::ifstream file( filename.c_str(), std::ios::binary );
-    if( !file.is_open() )
-        RuntimeError("Could not open ",filename);
+    if( !file.is_open() ){
+
+      //check for automatically added extension  
+      filename = filename + "." + FileExtension(BINARY);
+      if( !file.is_open() ) RuntimeError("Could not open ",filename);
+
+    }
+
 
     Int height, width;
     file.read( (char*)&height, sizeof(Int) );

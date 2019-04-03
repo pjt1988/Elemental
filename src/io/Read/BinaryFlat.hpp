@@ -18,8 +18,10 @@ BinaryFlat( Matrix<T>& A, Int height, Int width, const string filename )
 {
     EL_DEBUG_CSE
     std::ifstream file( filename.c_str(), std::ios::binary );
-    if( !file.is_open() )
-        RuntimeError("Could not open ",filename);
+    if( !file.is_open() ){
+      filename = filename + "." + FileExtension(BINARY_FLAT);
+      if( !file.is_open() ) RuntimeError("Could not open ",filename);
+    }
 
     const Int numBytes = FileSize( file );
     const Int numBytesExp = height*width*sizeof(T);
@@ -42,8 +44,10 @@ BinaryFlat
 {
     EL_DEBUG_CSE
     std::ifstream file( filename.c_str(), std::ios::binary );
-    if( !file.is_open() )
-        RuntimeError("Could not open ",filename);
+    if( !file.is_open() ){
+      filename = filename + "." + FileExtension(BINARY_FLAT);
+      if( !file.is_open() ) RuntimeError("Could not open ",filename);
+    }
 
     const Int numBytes = FileSize( file );
     const Int numBytesExp = height*width*sizeof(T);

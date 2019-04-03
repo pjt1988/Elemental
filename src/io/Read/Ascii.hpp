@@ -18,8 +18,10 @@ Ascii( Matrix<T>& A, const string filename )
 {
     EL_DEBUG_CSE
     std::ifstream file( filename.c_str() );
-    if( !file.is_open() )
-        RuntimeError("Could not open ",filename);
+    if( !file.is_open() ){
+      filename = filename + "." + FileExtension(ASCII);
+      if( !file.is_open() ) RuntimeError("Could not open ",filename);
+    }
 
     // Walk through the file once to both count the number of rows and
     // columns and to ensure that the number of columns is consistent
@@ -66,8 +68,10 @@ Ascii( AbstractDistMatrix<T>& A, const string filename )
 {
     EL_DEBUG_CSE
     std::ifstream file( filename.c_str() );
-    if( !file.is_open() )
-        RuntimeError("Could not open ",filename);
+    if( !file.is_open() ){
+      filename = filename + "." + FileExtension(ASCII);
+      if( !file.is_open() ) RuntimeError("Could not open ",filename);
+    }
 
     // Walk through the file once to both count the number of rows and
     // columns and to ensure that the number of columns is consistent

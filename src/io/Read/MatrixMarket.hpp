@@ -18,8 +18,10 @@ void MatrixMarket( Matrix<T>& A, const string filename )
     EL_DEBUG_CSE
     typedef Base<T> Real;
     std::ifstream file( filename.c_str() );
-    if( !file.is_open() )
-        RuntimeError("Could not open ",filename);
+    if( !file.is_open() ){
+      filename = filename + "." + FileExtension(MATRIX_MARKET);
+      if( !file.is_open() ) RuntimeError("Could not open ",filename);
+    }
 
     // Read the header
     // ===============
@@ -238,8 +240,11 @@ void MatrixMarket( SparseMatrix<T>& A, const string filename )
     EL_DEBUG_CSE
     typedef Base<T> Real;
     std::ifstream file( filename.c_str() );
-    if( !file.is_open() )
-        RuntimeError("Could not open ",filename);
+    if( !file.is_open() ){
+      filename = filename + "." + FileExtension(MATRIX_MARKET);
+      if( !file.is_open() ) RuntimeError("Could not open ",filename);
+    }
+
 
     // Read the header
     // ===============
@@ -409,8 +414,11 @@ void MatrixMarket( DistSparseMatrix<T>& A, const string filename )
     EL_DEBUG_CSE
     typedef Base<T> Real;
     std::ifstream file( filename.c_str() );
-    if( !file.is_open() )
-        RuntimeError("Could not open ",filename);
+    if( !file.is_open() ){
+      filename = filename + "." + FileExtension(MATRIX_MARKET);
+      if( !file.is_open() ) RuntimeError("Could not open ",filename);
+    }
+
 
     // Read the header
     // ===============
